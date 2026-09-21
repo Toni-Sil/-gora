@@ -44,3 +44,14 @@ Motor, limiares, retenção/proteção de referência vocal e confirmação adic
 - [ ] E5: integrar pesquisa e conteúdo acessível de vídeos; validar WEB01–WEB10. A inclusão em uma entrega anterior depende do planejamento técnico.
 
 Não preservar arquivo oculto de transcrições expiradas. Não afirmar que assistiu a vídeo sem acesso ao conteúdo correspondente. Provedor de pesquisa, limites, integração de vídeos e calibração de resumos continuam pendentes.
+
+## Biblioteca local — escopo aprovado
+
+- [x] Definir biblioteca de livros/PDFs permanente, independente da expiração de conversas.
+- [x] Definir pesquisa automática de obras ausentes e confirmação antes do download/incorporação permanente.
+- [ ] E1: contratos de catálogo, escopos e estados demonstrativos de importação/consulta.
+- [ ] Etapa de conhecimento/E5: PDF textual, catálogo, indexação e recuperação contextual com localização e edição.
+- [ ] Ampliar para OCR, análises comparativas e descoberta de versões completas de acesso permitido.
+- [ ] Validar LIB01–LIB11 (seção 17 do SDD), incluindo ausência de acesso, extração parcial, exclusão e cancelamento.
+
+Índice, OCR, cotas de armazenamento, escopos e processamento remoto continuam pendentes. Não confundir livro disponível com leitura integral; não aplicar expiração de dez dias aos documentos.
