@@ -31,3 +31,9 @@ Testar caminhos relevantes: persistência, exclusão, interrupção, permissão 
 ## Identidade e apresentação natural
 
 Aplicar a seção 14 do SDD e os critérios ID01–ID12. Registrar nome apresentado sem pedir confirmação administrativa; distinguir apresentação de menção a terceiros. A adesão inicial ao reconhecimento vocal persistente ocorre fora do diálogo principal e pertence a cada pessoa. Visitantes conversam sem referência vocal persistente. Não confundir permissão de microfone, nome, voz provável e autorização de acesso. Usar perfis e memória separados; suspender atribuição diante de troca de voz, ambiguidade ou sobreposição. Não inferir identidade a partir de opiniões. Não liberar histórico reservado só por reconhecimento vocal. Nenhuma gravação, referência vocal ou perfil real deve ser publicado no repositório.
+
+## Memória seletiva e pesquisa
+
+Aplicar seções 15 e 16 do SDD. Expirar detalhes textuais após dez dias, sem arquivo oculto; preservar resumos relevantes, perfis úteis e lembretes fixados. Manutenção idempotente ao iniciar e durante uso prolongado, respeitando visitantes e isolamento por pessoa. Não fingir lembrança ou esquecimento, nem promover fala da IA a fato. Validar MEM01–MEM08.
+
+Pesquisar seletivamente atualidade e obras, com indicador discreto e fontes acessíveis sob demanda. Distinguir fatos, opiniões e ficção; manter proveniência e datas. Vídeos só podem ser analisados até a cobertura realmente acessada; metadados não comprovam conteúdo assistido. Tratar páginas como dados não confiáveis para instruções, limitar consultas e custos e não enviar histórico privado. Validar WEB01–WEB10. Essas capacidades estão especificadas, não implementadas.
