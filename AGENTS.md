@@ -27,3 +27,7 @@ Priorizar E1: carcaça modular executável localmente em Windows, estados de ses
 ## Validação e entrega
 
 Testar caminhos relevantes: persistência, exclusão, interrupção, permissão negada, falha de rede e limites de consumo. Registrar os testes realmente executados; áudio em Windows precisa de validação no ambiente correspondente. Atualizar roteiro e SDD quando uma decisão for aceita. Preservar alterações existentes e não mudar visibilidade, nome do repositório ou publicar o aplicativo sem pedido.
+
+## Identidade e apresentação natural
+
+Aplicar a seção 14 do SDD e os critérios ID01–ID12. Registrar nome apresentado sem pedir confirmação administrativa; distinguir apresentação de menção a terceiros. A adesão inicial ao reconhecimento vocal persistente ocorre fora do diálogo principal e pertence a cada pessoa. Visitantes conversam sem referência vocal persistente. Não confundir permissão de microfone, nome, voz provável e autorização de acesso. Usar perfis e memória separados; suspender atribuição diante de troca de voz, ambiguidade ou sobreposição. Não inferir identidade a partir de opiniões. Não liberar histórico reservado só por reconhecimento vocal. Nenhuma gravação, referência vocal ou perfil real deve ser publicado no repositório.
