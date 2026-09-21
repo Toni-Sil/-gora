@@ -1,0 +1,35 @@
+# Credenciais
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# Dados pessoais e execução local
+/data/
+/recordings/
+/exports/
+/backups/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.log
+agora-conversas*.json
+
+# Dependências e compilação
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+dist/
+build/
+coverage/
+.pytest_cache/
+
+# Sistema
+.DS_Store
+Thumbs.db
