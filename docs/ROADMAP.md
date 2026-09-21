@@ -6,6 +6,8 @@ A especificação em [SDD.md](SDD.md) define requisitos e critérios de aceitaç
 - [x] Confirmar Windows, plataforma de execução e direção de áudio.
 - [x] Aprovar escuta automática durante sessão ativa, após autorização.
 - [x] Preparar referência visual demonstrativa e documentação no GitHub.
+- [x] Especificar apresentação natural, registro de nomes, adesão vocal inicial e memória por interlocutor.
+- [ ] Implementar e validar ID01–ID12 da seção 14 do SDD; não confundir aprovação com implementação.
 - [ ] E0: escolher stack, formato de execução, provedor de modelo e voz com avaliação de custo e compatibilidade.
 - [ ] E1: separar interface, coordenador de sessão, contratos e adaptadores; entregar execução local documentada e demonstração sem credenciais.
 - [ ] E2: integrar diálogo real, cancelamento, histórico persistente e memória manual.
@@ -24,3 +26,9 @@ Formato instalado ou navegador local; comportamento ao minimizar; iniciativa dur
 ## Verificação de entrega
 
 Registrar instruções reproduzíveis, testes executados e limitações. Validar no computador real com fone e depois com caixas de som. Sintaxe válida não comprova áudio, cancelamento ou naturalidade.
+
+## Identidade conversacional — sequência aprovada
+
+Em E1, incluir contratos de identidade e simulações identificadas. Em E2, implementar apresentações, visitante e separação de perfis. Após E3, avaliar reconhecimento vocal real com adesão inicial e qualidade de amostra. Em E4, garantir que memória inteligente e mapas permaneçam isolados por pessoa. Grupos e fala sobreposta ficam para evolução; reconhecimento vocal não libera sozinho histórico reservado.
+
+Motor, limiares, retenção/proteção de referência vocal e confirmação adicional de acesso ainda precisam ser definidos. O nome pode surgir e ser registrado naturalmente; isso não implica adesão automática à identificação vocal persistente.
