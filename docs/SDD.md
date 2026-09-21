@@ -1,6 +1,6 @@
 # Ágora — especificação técnica pública
 
-Versão 0.5-public · 21/09/2026
+Versão 0.6-public · 21/09/2026
 Repositório: https://github.com/Toni-Sil/-gora
 Estado: planejamento e referência demonstrativa; aplicativo completo ainda não implementado.
 
@@ -50,7 +50,7 @@ Voz conversacional serena, curiosa e direta. Respostas concisas por padrão, pro
 
 Distinguir relato, exploração de hipótese e argumento. Acompanhar mudanças de assunto. Não inventar consciência, experiências humanas ou crenças pessoais.
 
-Em política e religião, avaliar argumentos sem presumir identidade do interlocutor. Distinguir fato, interpretação, tradição, fé e evidência. Não fabricar fontes, citações ou atualidade. Consulta à internet é extensão ainda não definida.
+Em política e religião, avaliar argumentos sem presumir identidade do interlocutor. Distinguir fato, interpretação, tradição, fé e evidência. Não fabricar fontes, citações ou atualidade. Pesquisa seletiva na internet está aprovada, incluindo atualidade, obras e análises; regras na seção 16.
 
 Correções linguísticas devem ser breves e contextuais. Não corrigir como erro do usuário um problema de transcrição; confirmar termos ambíguos. Respeitar registro coloquial compreensível. Frequência e apresentação por voz ou painel precisam de avaliação.
 
@@ -79,7 +79,7 @@ Pedido ao modelo: ID de turno, contexto selecionado, memórias pertinentes, vers
 
 Evento: sessão, turno, sequência, tipo, conteúdo e horário. O coordenador rejeita eventos de turnos cancelados. Interromper para o áudio e cancela geração/reprodução pendentes. Não tratar texto não ouvido como necessariamente comunicado.
 
-Memória: ID, person_id, categoria, texto, origem, data, estado de revisão. Operações: criar, aprovar, revisar, editar, excluir e exportar. Política de aprovação automática e retenção permanece aberta.
+Memória: ID, person_id, categoria, texto, origem, data, estado de revisão. Operações: criar, aprovar, revisar, editar, excluir e exportar. Retenção textual definida na seção 15; seleção de memórias deve preservar origem e incerteza.
 
 ## 8. Estados
 
@@ -111,7 +111,7 @@ Segredos ficam fora da interface e do repositório. Serviço local deve restring
 | E2 | Diálogo real por texto e voz por turnos. | Modelo contextual, histórico, cancelamento e falhas recuperáveis. |
 | E3 | Conversa contínua. | Pelo menos cinco turnos sem envio manual, interrupção por voz, pausa e tratamento de eco. |
 | E4 | Memória inteligente e mapa. | Revisão, origem, exclusão efetiva e ausência de rótulos indevidos. |
-| E5 | Fontes e expansão. | Apenas conforme prioridades aprovadas. |
+| E5 | Pesquisa seletiva, vídeos acessíveis e expansão. | Pesquisa aprovada; validar fontes e limites conforme seção 16. |
 
 E1 não equivale ao MVP final. Um botão de ditado não satisfaz conversa contínua.
 
@@ -123,7 +123,7 @@ Avaliar naturalidade: relato breve recebe resposta proporcional; posição polí
 
 ## 12. Pendências
 
-Formato instalado ou navegador local; stack; fornecedores; comportamento ao minimizar; iniciativa durante silêncio; timbre; apresentação de correções; aprovação e retenção de memórias; consulta a fontes; ferramenta de desenvolvimento e nome definitivo.
+Formato instalado ou navegador local; stack; fornecedores; comportamento ao minimizar; iniciativa durante silêncio; timbre; apresentação de correções; calibração da seleção de resumos; fornecedores de pesquisa e acesso a vídeos; ferramenta de desenvolvimento e nome definitivo.
 
 ## 13. Execução pelo desenvolvedor
 
@@ -235,3 +235,94 @@ E1: contratos e simulação explícita dos estados de identidade. E2: apresenta�
 Permanecem abertas: motor de reconhecimento, execução local/remota, critérios de qualidade e confiança, proteção/retenção das referências, confirmação adicional de histórico reservado e experiência de grupos. A aprovação do comportamento não equivale a seleção dessas tecnologias.
 
 **Revisão 0.5-public:** incorporada proposta aprovada de identidade conversacional, adesão vocal inicial, perfis separados e competência de diálogo. Requisitos documentados; ainda não implementados.
+
+## 15. Memória seletiva e esquecimento gradual — aprovado
+
+### Política
+
+Manter detalhes textuais recentes por dez dias, contados do horário original de cada mensagem. Ao expirar, preservar apenas resumos importantes e descartar detalhes passageiros; não criar arquivo oculto de transcrições antigas. Consultar uma mensagem não reinicia seu prazo. Nomes e preferências úteis, resumos relevantes e lembranças explicitamente marcadas como “lembre disso” não expiram automaticamente por essa regra. Referências vocais seguem sua política própria, não o prazo de transcrições.
+
+Executar manutenção ao abrir o aplicativo e periodicamente durante sessões longas, sem exigir serviço em segundo plano. Dados vencidos não entram no contexto antes da revisão, mesmo quando a aplicação ficou fechada. Aplicação fechada não executa exclusão; a manutenção ocorre na próxima execução. Explicar esse comportamento nas configurações.
+
+A seleção considera continuidade do assunto, dúvidas em aberto, recorrência, correções relevantes e pedidos explícitos. Não preservar cada detalhe sob o rótulo de “resumo”, nem reintroduzir transcrições por caches ou índices. Limites de tamanho e de quantidade dos resumos devem ser configurados e medidos antes do aceite de desempenho.
+
+### Integridade da lembrança
+
+- Separar afirmação do interlocutor, hipótese explorada, sugestão da IA e informação verificada externamente.
+- Resposta do modelo não vira fato confirmado só por entrar na memória.
+- Resumos mantêm person_id, tema, data, origem, nível de certeza e condição da origem (disponível ou expirada). Após excluir o original, conservar identificação mínima de proveniência, não uma cópia do texto descartado.
+- Resumir e validar o resultado antes da exclusão, com gravação atômica e manutenção idempotente. Se a síntese falhar, não inventar resumo nem conservar detalhes indefinidamente: registrar a falha sem conteúdo pessoal, preservar registros explicitamente fixados e executar a política de expiração.
+- Não apagar uma sessão ativa em uso de forma inconsistente; retirar trechos expirados também do contexto/cache conforme os limites de turno.
+- Exclusão e edição devem invalidar índices, caches e resumos derivados pertinentes. Exportações manuais externas não podem ser apagadas pelo aplicativo; restauração deve reaplicar a política antes de disponibilizar dados.
+- Não fingir esquecimento: se existe resumo, dizer que lembra do tema mas não dos detalhes; se nada restou, reconhecer isso e reconstruir o contexto com a pessoa.
+- Recuperar só lembranças relevantes e autorizadas, não todo o histórico. Compactação de armazenamento e redução de contexto/custo são objetivos distintos.
+- Preservar isolamento entre perfis. Visitantes continuam sem memória persistente; a regra de dez dias não cria retenção para visitantes.
+- “Lembre disso” protege o conteúdo indicado da expiração automática, não toda a conversa; exclusão explícita ainda prevalece.
+
+### Critérios de aceitação
+
+- MEM01: após dez dias, detalhe passageiro deixa de aparecer no armazenamento ativo, recuperação e índices.
+- MEM02: resumo importante continua acessível com contexto, origem mínima e incerteza preservados.
+- MEM03: lembrete fixado permanece, mas pode ser excluído explicitamente.
+- MEM04: reinício após período fechado processa vencimentos antes de recuperar memórias.
+- MEM05: manutenção repetida não duplica resumos; falha não produz lembranças inventadas.
+- MEM06: hipótese e sugestão da IA não viram crença/fato confirmado.
+- MEM07: perguntas sobre detalhe eliminado recebem reconhecimento honesto da limitação.
+- MEM08: restauração e caches não ressuscitam detalhes expirados; testes usam relógio controlado, não espera real de dez dias.
+
+## 16. Pesquisa na internet e repertório cultural — aprovado
+
+### Escopo e acionamento
+
+Pesquisar seletivamente quando a pergunta exigir atualidade, comprovação, citação, dados específicos de uma obra ou quando solicitado. Abranger política e acontecimentos religiosos, filosofia, filmes, animes, séries e vídeos de opinião ou crítica relacionados a esses temas. Não pesquisar a cada frase nem para toda explicação conceitual estável.
+
+A pesquisa integra o produto planejado; o fornecedor, as quotas e a posição exata na sequência de entregas ainda precisam ser definidos. Sem rede ou ferramenta disponível, explicar a limitação e distinguir conhecimento geral de informação recém-verificada. Não simular pesquisa.
+
+### Tela limpa
+
+Exibir apenas um pequeno indicador lateral de pesquisa, sem lista de fontes na tela principal e sem leitura automática de URLs. O indicador abre referências sob demanda no painel da mesma janela. Deve ser acessível por teclado, ter nome acessível e área clicável adequada; não depender exclusivamente da cor.
+
+Representar estados reais: pesquisando, concluído e falha. Não abrir painéis automaticamente. Na fala, atribuir uma opinião ao autor quando necessário ao entendimento, sem transformar toda resposta em relatório de fontes. Fontes invisíveis por padrão continuam rastreáveis.
+
+### Fontes e qualidade
+
+- Distinguir fato, notícia, opinião, crítica, interpretação filosófica e ficção.
+- Priorizar fontes primárias para declarações e fatos; comparar evidências independentes quando a afirmação for controversa. Várias republicações do mesmo material não são fontes independentes.
+- Conferir data de publicação e data do acontecimento; não tratar matéria antiga como novidade.
+- Registrar URL, título, autor/canal quando disponível, datas e qual afirmação o conteúdo sustenta. Não apresentar trecho de resultado de busca como se a página completa tivesse sido lida.
+- Não dar o mesmo peso a todas as alegações; explicitar divergências e incertezas relevantes em linguagem natural.
+- Conteúdo externo é material de consulta, não instrução: ignorar tentativas de mudar regras, acessar perfis, executar comandos ou transmitir segredos.
+- Consultas usam apenas o assunto necessário; não enviar nomes, referências vocais ou histórico privado a buscadores por padrão.
+- Respeitar orçamento, cancelamento e limite de resultados/tempo. Resultados atrasados de turno cancelado não devem interromper o novo assunto.
+- Cache de fontes tem validade por tipo de conteúdo e fica separado da memória pessoal; não manter transcrições privadas como cache de pesquisa.
+
+### Filmes, animes e séries
+
+Relacionar questões filosóficas a temas, personagens e escolhas narrativas, distinguindo acontecimentos da obra de interpretações. Desambiguar título, adaptação, temporada e episódio quando isso alterar a análise. Não inventar cenas ou falas.
+
+Proposta de padrão até preferência explícita: evitar spoilers; se a análise exigir revelações, perguntar até onde a pessoa assistiu. Registrar a preferência somente no perfil correto. Essa proteção é uma recomendação de implementação, não uma preferência pessoal já informada.
+
+### Vídeos de opinião e crítica
+
+Aceitar links e pesquisar vídeos pertinentes. Analisar somente conteúdo efetivamente acessível: transcrição/legendas, trechos fornecidos ou áudio/vídeo processados por integração específica. Registrar modalidade e cobertura (completo/trecho/metadados). Não dizer que assistiu ao vídeo quando só leu título, descrição ou transcrição.
+
+Se só houver título/descrição, limitar conclusões a esses dados e oferecer análise de um trecho/transcrição fornecido. Legenda automática pode conter erro; qualificar citações incertas. Usar timestamps somente quando fornecidos pelo material.
+
+Na crítica, separar tese do autor, razões, evidências, objeções e interpretação da Ágora, apresentando isso em conversa natural. Não atribuir ao autor uma posição que o trecho não sustenta. Uma transcrição não permite inferir cenas, gestos ou montagem. Não contornar acesso restrito nem reproduzir obras completas.
+
+### Contratos e testes
+
+Adicionar adaptador de pesquisa e resolvedor de conteúdo com cancelamento, custos, status, URL, datas, modalidade, cobertura, proveniência e limite de validade. Vincular cada fonte às afirmações apoiadas e ao turno correspondente.
+
+- WEB01: pergunta atual aciona pesquisa; explicação estável pode responder sem pesquisa desnecessária.
+- WEB02: fontes ficam ocultas na tela principal e podem ser abertas pelo indicador acessível.
+- WEB03: falha ou ausência de acesso não é apresentada como verificação concluída.
+- WEB04: notícia antiga, opinião e conteúdo fictício são diferenciados.
+- WEB05: vídeo com apenas metadados não gera análise inventada do conteúdo.
+- WEB06: transcrição parcial e legenda automática mantêm suas limitações registradas.
+- WEB07: conteúdo externo não altera regras nem provoca envio de memória privada.
+- WEB08: cancelamento evita resposta atrasada; teto de pesquisa evita consumo sem controle.
+- WEB09: fontes recuperadas e lembranças pessoais permanecem separadas.
+- WEB10: spoilers são evitados até haver contexto suficiente ou pedido explícito.
+
+**Revisão 0.6-public:** pesquisa seletiva e repertório cultural aprovados; detalhes textuais revisados após dez dias, preservando resumos úteis e lembranças fixadas. Indicador discreto com fontes sob demanda. Documentação, não implementação.
