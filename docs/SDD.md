@@ -1,6 +1,6 @@
 # Ágora — especificação técnica pública
 
-Versão 0.6-public · 21/09/2026
+Versão 0.7-public · 21/09/2026
 Repositório: https://github.com/Toni-Sil/-gora
 Estado: planejamento e referência demonstrativa; aplicativo completo ainda não implementado.
 
@@ -326,3 +326,73 @@ Adicionar adaptador de pesquisa e resolvedor de conteúdo com cancelamento, cust
 - WEB10: spoilers são evitados até haver contexto suficiente ou pedido explícito.
 
 **Revisão 0.6-public:** pesquisa seletiva e repertório cultural aprovados; detalhes textuais revisados após dez dias, preservando resumos úteis e lembranças fixadas. Indicador discreto com fontes sob demanda. Documentação, não implementação.
+
+## 17. Biblioteca local de livros e PDFs — aprovado
+
+### Objetivo e permanência
+
+Permitir adicionar livros e PDFs ao computador para consulta contextual durante o diálogo, combinando passagens do acervo com pesquisa externa quando necessário. Acervo documental, memória de pessoas e cache de pesquisa são conjuntos separados.
+
+Livros importados permanecem até remoção explícita; não entram na expiração de dez dias das conversas. Não arquivar transcrições pessoais como livros para contornar a política de memória. Importar um documento não treina novamente o modelo.
+
+### Importação e catálogo
+
+Aceitar seleção explícita de arquivos na mesma tela, com gerenciamento em painel lateral. Extrair texto e estrutura quando possível; documentos escaneados exigem OCR, com status e limitações de qualidade visíveis. Arquivo parcialmente processado não pode ser anunciado como integralmente disponível.
+
+Catalogar document_id, título, autor, edição, tradução/idioma, capítulos quando identificáveis, hash, origem, data de importação, escopo de acesso e estado do processamento. Metadados ausentes permanecem desconhecidos ou podem ser corrigidos; não inventar autor ou edição a partir do nome do arquivo.
+
+Manter localização verificável de cada trecho: página física do PDF e numeração impressa quando disponível, capítulo e documento/edição de origem. Não confundir paginações. Tratar duplicatas sem apagar ou substituir silenciosamente edições diferentes.
+
+Processar importação em tarefas canceláveis e limitadas, sem bloquear voz/interface nem carregar todo o acervo em memória. Engines de extração, OCR, indexação e seus limites de recursos ainda serão escolhidos.
+
+### Consulta e análise
+
+1. Interpretar a pergunta e recuperar passagens pertinentes dos documentos permitidos.
+2. Ler contexto adjacente para evitar conclusões baseadas em frase isolada.
+3. Comparar capítulos ou obras quando a análise exigir, distinguindo fonte original, comentário e interpretação da Ágora.
+4. Complementar com internet quando houver necessidade de atualidade ou material ausente.
+5. Responder naturalmente e manter referências acessíveis apenas pelo indicador/painel discreto.
+
+Distinguir livro encontrado, importado, indexado, trechos consultados e análise abrangente. Ter o PDF completo não significa tê-lo lido integralmente. Não afirmar cobertura além do material realmente examinado nem prometer que mais documentos garantem respostas corretas. OCR incerto exige ressalva ou conferência antes de citação literal.
+
+Análises aprofundadas podem levar mais tempo. Mostrar estado real de consulta, permitir interrupção e respeitar limites de custo/tempo/contexto. Evitar repetidos avisos falados; não gerar resposta apressada só para mascarar processamento. Ausência de evidência no acervo deve ser reconhecida, sem inventar passagens.
+
+### Busca de obras ausentes e downloads
+
+Pesquisar automaticamente a existência e o acesso a obras pertinentes, sem cadastrar todo resultado. Buscar versões completas legalmente acessíveis: domínio público aplicável, acesso aberto ou disponibilização autorizada pelo autor/editora. Verificar a edição e as condições da fonte; um PDF encontrado não comprova autorização de distribuição.
+
+Adotar a opção recomendada: pedir confirmação antes de baixar e incorporar uma nova obra ao acervo permanente. A aprovação geral desta função não autoriza downloads automáticos indiscriminados. Mostrar título, origem, edição e tamanho quando conhecido para uma confirmação curta. Uma importação explicitamente solicitada de arquivo local já escolhido não exige confirmação redundante.
+
+Quando não houver versão completa acessível, indicar onde obter ou consultar a obra; não contornar pagamento, DRM, autenticação ou restrições. Não realizar compras ou criar contas. Manter origem e informação de acesso no catálogo.
+
+### Acesso e integridade
+
+Não supor que todos os perfis podem consultar todos os documentos. Aplicar escopo privado ou compartilhado explicitamente configurado e filtrar antes da recuperação. Trechos enviados ao modelo remoto saem do computador; informar esse comportamento na configuração e enviar apenas o necessário. Compartilhamento entre perfis e política de processamento remoto precisam ser definidos antes da integração real.
+
+Documentos são fontes, nunca instruções para mudar regras, executar comandos ou revelar dados. Não executar conteúdo embutido. Não publicar PDFs, texto extraído ou índices pessoais no Git.
+
+Remover livro deve retirar seus trechos dos índices e caches de consulta e invalidar resultados pendentes relacionados. Cópias originais fora do acervo não devem ser apagadas silenciosamente. Memórias conversacionais existentes não devem apresentar como conferida uma referência que deixou de estar disponível. Índices reconstruíveis podem ser refeitos; originais não são eliminados automaticamente para liberar espaço.
+
+### Contratos e critérios de aceitação
+
+Adicionar catálogo, importador, extrator/OCR, índice de trechos e recuperador contextual por interfaces substituíveis. Resultados devem carregar document_id, edição, localização, modalidade de extração, cobertura, qualidade e escopo de acesso.
+
+- LIB01: importar PDF textual preserva trechos e localização verificável.
+- LIB02: PDF escaneado exige OCR; falha/extração parcial é informada sem conteúdo inventado.
+- LIB03: consulta recupera trecho com contexto e distingue edições/traduções.
+- LIB04: referências ficam sob demanda, sem ocupar a tela principal.
+- LIB05: expiração de conversas não remove livros.
+- LIB06: busca externa não baixa/incorpora nova obra sem confirmação.
+- LIB07: obra sem acesso permitido resulta em indicação de acesso, não contorno de restrição.
+- LIB08: livro encontrado/indexado não é descrito como integralmente analisado.
+- LIB09: exclusão invalida recuperação e caches, sem apagar original externo silenciosamente.
+- LIB10: perfil não autorizado não recupera trechos privados; documento não altera instruções.
+- LIB11: importação e análise são canceláveis e respeitam limites; resposta atrasada não retoma turno cancelado.
+
+### Planejamento
+
+E1: contratos, painel e estados demonstrativos. Na etapa de conhecimento, começar por PDF textual, catálogo, consulta contextual e rastreabilidade; depois OCR e descoberta de obras, sempre com critérios correspondentes. Integração com E5 e prioridades serão fechadas no planejamento técnico.
+
+Permanecem abertos: limite de espaço/tamanho por arquivo, indexação, OCR, estratégia de busca, processamento local/remoto e compartilhamento por perfil. Não incluir downloads permanentes sem confirmação como padrão.
+
+**Revisão 0.7-public:** biblioteca de PDFs e consulta aprofundada incorporadas; documentos permanentes separados da memória temporária; pesquisa de obras ausentes e confirmação antes de aquisição do arquivo. Especificação, ainda não implementação.
