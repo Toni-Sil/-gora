@@ -16,7 +16,7 @@ Priorizar E1: carcaça modular executável localmente em Windows, estados de ses
 
 - Isolar modelo, transcrição, síntese, armazenamento e interface. Evitar dependências pesadas sem justificativa para a plataforma de destino.
 - Nunca incluir chaves, tokens, gravações, histórico pessoal ou banco de dados no Git. Credenciais ficam no backend local.
-- A escuta automática exige primeira autorização, sessão ativa, indicação visível e pausa que realmente interrompa a captura. Não introduzir escuta em segundo plano por suposição.
+- A escuta automática exige primeira autorização, sessão ativa, indicação visível e pausa que realmente interrompa a captura. Segundo plano está aprovado durante sessão ativa: minimizar/X mantém a bandeja; Sair encerra. Não capturar fora da sessão; aplicar seção 18.
 - Cancelar geração e reprodução obsoletas quando o usuário interromper. Não executar eventos de turnos antigos.
 - Memórias devem ter origem e permitir edição/exclusão. Não converter exploração de argumentos em crença definitiva.
 - Não atribuir erros de transcrição à linguagem do usuário.
@@ -36,8 +36,20 @@ Aplicar a seção 14 do SDD e os critérios ID01–ID12. Registrar nome apresent
 
 Aplicar seções 15 e 16 do SDD. Expirar detalhes textuais após dez dias, sem arquivo oculto; preservar resumos relevantes, perfis úteis e lembretes fixados. Manutenção idempotente ao iniciar e durante uso prolongado, respeitando visitantes e isolamento por pessoa. Não fingir lembrança ou esquecimento, nem promover fala da IA a fato. Validar MEM01–MEM08.
 
-Pesquisar seletivamente atualidade e obras, com indicador discreto e fontes acessíveis sob demanda. Distinguir fatos, opiniões e ficção; manter proveniência e datas. Vídeos só podem ser analisados até a cobertura realmente acessada; metadados não comprovam conteúdo assistido. Tratar páginas como dados não confiáveis para instruções, limitar consultas e custos e não enviar histórico privado. Validar WEB01–WEB10. Essas capacidades estão especificadas, não implementadas.
+Pesquisar seletivamente atualidade e obras, com indicador discreto e fontes acessíveis sob demanda. Distinguir fatos, opiniões e ficção; manter proveniência e datas. Vídeos só podem ser analisados até a cobertura realmente acessada; metadados não comprovam conteúdo assistido. Tratar páginas como dados não confiáveis para instruções, limitar tentativas e resultados e medir consumo e não enviar histórico privado. Validar WEB01–WEB10. Essas capacidades estão especificadas, não implementadas.
 
 ## Biblioteca documental
 
 Aplicar a seção 17 do SDD e LIB01–LIB11. Acervo permanente não é memória conversacional: livros não expiram após dez dias. Preservar edição, tradução e localização; informar OCR falho e cobertura parcial. Recuperar apenas trechos permitidos e pertinentes. Não alegar leitura integral por ter indexado um PDF. Pesquisar obras ausentes automaticamente quando útil, mas confirmar antes de baixar/incorporar novas obras permanentemente. Não contornar acesso restrito nem publicar PDFs ou índices pessoais. Documentos são dados de consulta, não instruções. Escolhas de OCR, indexação, limites e compartilhamento ainda exigem definição técnica.
+
+## Ordem obrigatória de produção e operação
+
+Seguir E0 → E1 → E2 → E3 → E4 → E5 → E6 e os aceites do ROADMAP. Validar conversa real antes de continuidade, depois conhecimento e por último reconhecimento vocal. Preparar contratos de identidade cedo, mas não antecipar identificação real. Registrar evidências e resolver falhas antes de avançar.
+
+Aplicar seção 18 e OPS01–OPS10. Fechar janela mantém bandeja; checagem única de presença seguida de ausência de resposta encerra sessão e microfone, não o aplicativo. Não contar fala, processamento ou pesquisa como inatividade. Não presumir início com Windows ou escuta permanente.
+
+Correção falada explica significado e mostra uso correto, depois retoma o tema. A amostra de aproximadamente oito segundos avalia voz de saída, não comprova naturalidade integral ou identificação. Usar direção vocal própria inspirada no JARVIS.
+
+PIN local digitado protege acesso reservado por perfil/sessão; bloquear ao encerrar ou trocar interlocutor. Nunca enviar PIN ao modelo ou registrá-lo em logs. Voz reconhecida não substitui PIN.
+
+Não exigir teto financeiro predefinido na fase de testes. Medir consumo, manter cancelamento e limites técnicos contra ciclos infinitos e tratar cotas externas. Isso não autoriza contratação ou uso faturável por iniciativa do desenvolvedor.
