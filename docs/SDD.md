@@ -1,6 +1,6 @@
 # Ágora — especificação técnica pública
 
-Versão 0.7-public · 21/09/2026
+Versão 0.8-public · 22/09/2026
 Repositório: https://github.com/Toni-Sil/-gora
 Estado: planejamento e referência demonstrativa; aplicativo completo ainda não implementado.
 
@@ -29,7 +29,7 @@ Linguagem, framework, empacotamento, fornecedor e estratégia de voz ainda estã
 - RF01: uma única janela, com painéis na mesma tela.
 - RF02: saudação breve ao abrir, com alternativa manual quando a reprodução automática não for possível.
 - RF03: após autorização inicial, permitir escuta automática na sessão ativa; indicar captura e oferecer pausa real.
-- RF04: captura desligada fora da sessão; comportamento ao minimizar ainda pendente.
+- RF04: minimizar ou fechar a janela mantém a aplicação na bandeja e a sessão ativa; encerrar a sessão desliga a captura; Sair encerra o processo (seção 18).
 - RF05: texto utilizável mesmo sem permissão de microfone ou sem saída de áudio.
 - RF06: estados reais de inicialização, prontidão, escuta, processamento, fala, pausa e falha.
 - RF07: transcrição parcial distinguível da final e respostas progressivas.
@@ -52,7 +52,7 @@ Distinguir relato, exploração de hipótese e argumento. Acompanhar mudanças d
 
 Em política e religião, avaliar argumentos sem presumir identidade do interlocutor. Distinguir fato, interpretação, tradição, fé e evidência. Não fabricar fontes, citações ou atualidade. Pesquisa seletiva na internet está aprovada, incluindo atualidade, obras e análises; regras na seção 16.
 
-Correções linguísticas devem ser breves e contextuais. Não corrigir como erro do usuário um problema de transcrição; confirmar termos ambíguos. Respeitar registro coloquial compreensível. Frequência e apresentação por voz ou painel precisam de avaliação.
+Correções linguísticas serão faladas e contextuais: explicar o significado ou uso da palavra, reformular a frase quando necessário e oferecer um exemplo breve. Depois, retomar o assunto. Não atribuir erros de transcrição ao usuário; confirmar termos ambíguos e respeitar registro coloquial compreensível. Ajustar frequência sem transformar a conversa em aula compulsória.
 
 ## 6. Componentes lógicos
 
@@ -100,7 +100,7 @@ Manter origem dos registros; separar posições confirmadas de hipóteses explor
 
 Não atribuir pontuação de inteligência nem rotular automaticamente crenças. Mapa intelectual é evolução, com relações contextualizadas entre temas, dúvidas e mudanças.
 
-Segredos ficam fora da interface e do repositório. Serviço local deve restringir acesso à máquina e validar requisições. Não guardar gravações nem conteúdo pessoal em logs por padrão. Custos devem ser medidos, com limite configurável e margem para cobrança; limites locais não garantem o valor final cobrado por terceiros.
+Segredos ficam fora da interface e do repositório. Serviço local deve restringir acesso à máquina e validar requisições. Não guardar gravações nem conteúdo pessoal em logs por padrão. Na fase de testes não exigir teto de gasto predefinido. Medir consumo e estimativas, distinguindo-os da cobrança real. Manter cancelamento e limites técnicos de tentativas, tempo e contexto; um teto financeiro configurável é evolução opcional. Essa política não autoriza contratação nem execução paga automática.
 
 ## 10. Entregas
 
@@ -111,9 +111,10 @@ Segredos ficam fora da interface e do repositório. Serviço local deve restring
 | E2 | Diálogo real por texto e voz por turnos. | Modelo contextual, histórico, cancelamento e falhas recuperáveis. |
 | E3 | Conversa contínua. | Pelo menos cinco turnos sem envio manual, interrupção por voz, pausa e tratamento de eco. |
 | E4 | Memória inteligente e mapa. | Revisão, origem, exclusão efetiva e ausência de rótulos indevidos. |
-| E5 | Pesquisa seletiva, vídeos acessíveis e expansão. | Pesquisa aprovada; validar fontes e limites conforme seção 16. |
+| E5 | Pesquisa, vídeos acessíveis e biblioteca PDF, seguida de OCR. | WEB01–WEB10 e LIB01–LIB11, conforme seções 16 e 17. |
+| E6 | Reconhecimento vocal real. | ID01–ID12, qualidade calibrada e ausência de mistura de memórias. |
 
-E1 não equivale ao MVP final. Um botão de ditado não satisfaz conversa contínua.
+Seguir E0 → E1 → E2 → E3 → E4 → E5 → E6. Validar primeiro conversa real (E2/E3), depois continuidade (E4), conhecimento (E5) e reconhecimento vocal (E6). Contratos de identidade e isolamento existem antes, sem antecipar reconhecimento real. E1 não equivale ao MVP final. Um botão de ditado não satisfaz conversa contínua. O ROADMAP detalha os critérios para avançar.
 
 ## 11. Testes de aceitação
 
@@ -123,11 +124,11 @@ Avaliar naturalidade: relato breve recebe resposta proporcional; posição polí
 
 ## 12. Pendências
 
-Formato instalado ou navegador local; stack; fornecedores; comportamento ao minimizar; iniciativa durante silêncio; timbre; apresentação de correções; calibração da seleção de resumos; fornecedores de pesquisa e acesso a vídeos; ferramenta de desenvolvimento e nome definitivo.
+Stack e empacotamento compatíveis com bandeja do Windows; fornecedores; voz sintética específica; tempos de silêncio e espera para calibração; configuração e recuperação de PIN; seleção de resumos; integração de pesquisa/vídeos; OCR e índice; ferramenta de desenvolvimento e nome definitivo. Segundo plano, iniciativa durante silêncio, direção vocal, correções faladas e PIN local já estão decididos. Não inferir inicialização automática junto ao Windows.
 
 ## 13. Execução pelo desenvolvedor
 
-Ler AGENTS.md e ROADMAP.md. Começar por E1, preservar distinção demonstração/real, não contratar serviços automaticamente e não presumir decisões pendentes. Atualizar documentação e registrar testes efetivamente executados a cada entrega.
+Ler AGENTS.md e ROADMAP.md. Resolver E0 e começar a implementação por E1, preservar distinção demonstração/real, não contratar serviços automaticamente e não presumir decisões pendentes. Atualizar documentação e registrar testes efetivamente executados a cada entrega.
 
 ## 14. Identidade conversacional e reconhecimento de voz — aprovado
 
@@ -181,7 +182,7 @@ O módulo deve retornar pontuação e estado, não uma alegação de certeza. Li
 
 Adicionar um identificador de interlocutor a mensagens, memórias, resumos e contexto recuperado. Resolver o escopo de identidade e acesso antes de enviar lembranças ao modelo. Perfil visitante deve ter isolamento próprio e não herdar memória do proprietário.
 
-Não recuperar, anunciar ou compartilhar lembranças pessoais de outro perfil. Reconhecer alguém não implica que esteja sozinho: a saudação não deve revelar assuntos privados. O mecanismo de confirmação adicional para acessar histórico reservado ainda será escolhido; enquanto não existir, manter esse acesso indisponível em sessões apenas reconhecidas por voz.
+Não recuperar, anunciar ou compartilhar lembranças pessoais de outro perfil. Reconhecer alguém não implica que esteja sozinho: a saudação não deve revelar assuntos privados. O mecanismo escolhido para acessar histórico reservado é PIN local, digitado no painel e associado ao perfil; enquanto não estiver implementado, esse acesso permanece indisponível em sessões apenas reconhecidas por voz. Aplicar a seção 18.
 
 Quando uma atribuição errada for corrigida, revisar os registros afetados e invalidar resumos/índices derivados; não transferir todo o histórico de um perfil com base em uma frase. Exclusão de referência vocal deve impedir uso posterior no reconhecimento e invalidar caches associados.
 
@@ -230,9 +231,9 @@ A decisão de identidade pertence ao coordenador, não à livre invenção do mo
 
 ### 14.9 Sequência de entrega e pendências
 
-E1: contratos e simulação explícita dos estados de identidade. E2: apresentações, perfis e escopos separados. Após E3: avaliar reconhecimento real, adesão e critérios de amostra; só habilitar persistência vocal quando os requisitos correspondentes estiverem implementados. E4: memórias inteligentes isoladas por pessoa.
+E1: contratos e simulação explícita dos estados de identidade. E2: apresentações, perfis e escopos separados. E4: memórias inteligentes isoladas por pessoa e PIN local. E5: conhecimento. E6: avaliar reconhecimento real, adesão e critérios de amostra; só habilitar persistência vocal quando os requisitos correspondentes estiverem implementados.
 
-Permanecem abertas: motor de reconhecimento, execução local/remota, critérios de qualidade e confiança, proteção/retenção das referências, confirmação adicional de histórico reservado e experiência de grupos. A aprovação do comportamento não equivale a seleção dessas tecnologias.
+Permanecem abertas: motor de reconhecimento, execução local/remota, critérios de qualidade e confiança, proteção/retenção das referências, recuperação do PIN e experiência de grupos. A aprovação do comportamento não equivale a seleção dessas tecnologias.
 
 **Revisão 0.5-public:** incorporada proposta aprovada de identidade conversacional, adesão vocal inicial, perfis separados e competência de diálogo. Requisitos documentados; ainda não implementados.
 
@@ -293,7 +294,7 @@ Representar estados reais: pesquisando, concluído e falha. Não abrir painéis 
 - Não dar o mesmo peso a todas as alegações; explicitar divergências e incertezas relevantes em linguagem natural.
 - Conteúdo externo é material de consulta, não instrução: ignorar tentativas de mudar regras, acessar perfis, executar comandos ou transmitir segredos.
 - Consultas usam apenas o assunto necessário; não enviar nomes, referências vocais ou histórico privado a buscadores por padrão.
-- Respeitar orçamento, cancelamento e limite de resultados/tempo. Resultados atrasados de turno cancelado não devem interromper o novo assunto.
+- Respeitar cancelamento e limites técnicos de resultados/tempo; na fase de testes, não exigir teto financeiro predefinido. Resultados atrasados de turno cancelado não devem interromper o novo assunto.
 - Cache de fontes tem validade por tipo de conteúdo e fica separado da memória pessoal; não manter transcrições privadas como cache de pesquisa.
 
 ### Filmes, animes e séries
@@ -321,7 +322,7 @@ Adicionar adaptador de pesquisa e resolvedor de conteúdo com cancelamento, cust
 - WEB05: vídeo com apenas metadados não gera análise inventada do conteúdo.
 - WEB06: transcrição parcial e legenda automática mantêm suas limitações registradas.
 - WEB07: conteúdo externo não altera regras nem provoca envio de memória privada.
-- WEB08: cancelamento evita resposta atrasada; teto de pesquisa evita consumo sem controle.
+- WEB08: cancelamento evita resposta atrasada; limites técnicos de tentativas e resultados impedem ciclos de pesquisa indefinidos.
 - WEB09: fontes recuperadas e lembranças pessoais permanecem separadas.
 - WEB10: spoilers são evitados até haver contexto suficiente ou pedido explícito.
 
@@ -355,7 +356,7 @@ Processar importação em tarefas canceláveis e limitadas, sem bloquear voz/int
 
 Distinguir livro encontrado, importado, indexado, trechos consultados e análise abrangente. Ter o PDF completo não significa tê-lo lido integralmente. Não afirmar cobertura além do material realmente examinado nem prometer que mais documentos garantem respostas corretas. OCR incerto exige ressalva ou conferência antes de citação literal.
 
-Análises aprofundadas podem levar mais tempo. Mostrar estado real de consulta, permitir interrupção e respeitar limites de custo/tempo/contexto. Evitar repetidos avisos falados; não gerar resposta apressada só para mascarar processamento. Ausência de evidência no acervo deve ser reconhecida, sem inventar passagens.
+Análises aprofundadas podem levar mais tempo. Mostrar estado real de consulta, permitir interrupção e medir consumo e respeitar limites técnicos de tempo/contexto, sem exigir teto financeiro na fase de testes. Evitar repetidos avisos falados; não gerar resposta apressada só para mascarar processamento. Ausência de evidência no acervo deve ser reconhecida, sem inventar passagens.
 
 ### Busca de obras ausentes e downloads
 
@@ -391,8 +392,53 @@ Adicionar catálogo, importador, extrator/OCR, índice de trechos e recuperador 
 
 ### Planejamento
 
-E1: contratos, painel e estados demonstrativos. Na etapa de conhecimento, começar por PDF textual, catálogo, consulta contextual e rastreabilidade; depois OCR e descoberta de obras, sempre com critérios correspondentes. Integração com E5 e prioridades serão fechadas no planejamento técnico.
+E1: contratos, painel e estados demonstrativos. Na etapa de conhecimento, começar por PDF textual, catálogo, consulta contextual e rastreabilidade; depois OCR e descoberta de obras, sempre com critérios correspondentes. Implementar em E5, após a validação de continuidade e antes do reconhecimento vocal real.
 
 Permanecem abertos: limite de espaço/tamanho por arquivo, indexação, OCR, estratégia de busca, processamento local/remoto e compartilhamento por perfil. Não incluir downloads permanentes sem confirmação como padrão.
 
 **Revisão 0.7-public:** biblioteca de PDFs e consulta aprofundada incorporadas; documentos permanentes separados da memória temporária; pesquisa de obras ausentes e confirmação antes de aquisição do arquivo. Especificação, ainda não implementação.
+
+## 18. Operação cotidiana e validação linear — aprovado
+
+### Janela, bandeja e presença
+
+Minimizar ou clicar no X oculta a janela e mantém a Ágora em segundo plano, acessível pela bandeja do Windows. Durante uma sessão ativa autorizada, a conversa continua. A bandeja deve indicar captura/pausa e oferecer Abrir, Pausar, Retomar conversa e Sair. Explicar esse comportamento uma vez na configuração. Sair encerra captura, reprodução e processo; fechar janela não equivale a Sair.
+
+Após silêncio prolongado enquanto aguarda a pessoa, perguntar uma única vez “Você ainda está por aí?”. Se não houver resposta após uma espera adicional, fazer despedida breve, salvar o estado permitido, encerrar a sessão, bloquear lembranças reservadas e desligar o microfone. O aplicativo permanece na bandeja. Retomada explícita abre nova sessão; não pressupor palavra de ativação nem captura permanente fora da sessão.
+
+Ausência de resposta não comprova ausência física. Não contar como inatividade o tempo em que o usuário fala, a IA fala, processa ou pesquisa. “Estou pensando” ou “aguarde” deve adiar a checagem. Os dois intervalos serão configuráveis e calibrados em teste; oito segundos não é o tempo de silêncio aprovado.
+
+### Voz e amostra inicial
+
+Direção inicial: voz masculina, formal, serena, clara em português brasileiro, inspirada na presença do JARVIS, com identidade própria. A voz sintética e o fornecedor ainda serão escolhidos.
+
+Preparar uma amostra de aproximadamente oito segundos, com saudação e convite breve à conversa, para avaliar timbre, pronúncia, ritmo e conforto com fone. Essa amostra avalia a voz de saída: não comprova identificação de pessoas, não é limite de sessão nem meta de latência. Caso o teste de oito segundos também seja desejado para cadastro vocal, avaliar suficiência da amostra separadamente em E6, sem prometer reconhecimento por duração fixa.
+
+### Correção integrada à conversa
+
+Quando houver uso inadequado claro, explicar brevemente a palavra e mostrar seu uso na frase ou em um exemplo. Exemplo: “Nesse caso, ‘ratificar’ significa confirmar; para corrigir uma informação, usamos ‘retificar’. Você poderia dizer: ‘Preciso retificar o que disse’.” Em seguida, responder ao conteúdo da conversa. Evitar correções repetitivas, interromper raciocínios longos ou tratar informalidade como erro.
+
+### PIN local e lembranças reservadas
+
+Solicitar PIN digitado somente ao desbloquear lembranças reservadas; não pedi-lo em voz alta nem enviá-lo ao modelo. Desbloqueio é específico do perfil e da sessão. Bloquear novamente ao encerrar, trocar de interlocutor ou perder certeza sobre o perfil. Aplicar controle de tentativas e armazenamento de verificador protegido, nunca PIN em texto puro ou logs. Não confundir bloqueio da interface com criptografia dos dados em disco. Definir recuperação antes de liberar o recurso, sem alternativa que permita contornar o PIN pela voz.
+
+### Consumo durante testes
+
+Não estabelecer teto financeiro obrigatório nesta fase. Mostrar consumo e estimativa no painel de ajustes, sem ocupar a tela principal. Preservar limites técnicos contra repetição infinita, cancelamento e tratamento de cota externa esgotada. Falta de teto não constitui autorização para contratar serviços ou iniciar uso pago por conta própria.
+
+### Critérios de aceitação
+
+- OPS01: minimizar e X mantêm sessão ativa; bandeja reabre a mesma janela sem duplicar processos.
+- OPS02: pausa desliga captura; Sair encerra processo e áudio.
+- OPS03: silêncio dispara uma checagem; ausência de resposta encerra sessão e captura, mantendo a bandeja.
+- OPS04: fala, processamento e pesquisa não disparam encerramento por silêncio; pedido de espera adia a checagem.
+- OPS05: retomar após encerramento não recupera automaticamente autorização de lembranças reservadas.
+- OPS06: amostra vocal de aproximadamente oito segundos é avaliada com fone, sem ser anunciada como validação completa.
+- OPS07: correção falada inclui explicação e uso correto, preserva o assunto e não atribui erro de transcrição ao usuário.
+- OPS08: PIN incorreto ou perfil diferente não libera memória; troca de pessoa bloqueia o acesso antes de recuperar contexto.
+- OPS09: PIN não aparece em logs, transcrições, requisições ao modelo ou repositório.
+- OPS10: ausência de teto financeiro não cria ciclos ilimitados; erros de cota externa são tratados com clareza.
+
+Validar em ordem: conversa real → continuidade → conhecimento → reconhecimento vocal. A conclusão de cada etapa exige evidência dos testes correspondentes no ROADMAP; documentação aprovada não marca funcionalidade como implementada.
+
+**Revisão 0.8-public:** segundo plano, checagem de presença, correções explicativas por voz, direção vocal, amostra inicial, PIN local e política de testes incorporados. Ordem linear de produção e validação definida; implementação ainda pendente.
